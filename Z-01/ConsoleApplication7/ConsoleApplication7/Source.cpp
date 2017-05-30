@@ -1,66 +1,83 @@
-#include <iostream>
-#include <iomanip>
-#include <ctime>
-#include <time.h>
-#include <cstdint>
-#include <malloc.h>
-#include <new>
-#include <cstdlib>
-
-#ifdef _DEBUG
-#undef _DEBUG
-#include <omp.h>
-#define _DEBUG
-#else
-#include <omp.h>
-#endif
-
+#include <iostream>   // для оператора cout
+#include <iomanip>   // для функции setw
+#include <cassert>  // для функции assert
+#include <string>  // строчный тип данных
+#include <time.h> // для функций time, clock
+#include <omp.h> // для функций MPI
+/*==============================================*/
 using namespace std;
 
-int64_t size_mass;
+//#include <ctime>
+//#include <cstdint>
+//#include <malloc.h>
+//#include <new>
+//#include <cstdlib>
+//#include <iostream>
 
-int tuple_size = 2;
+//#include <cstring>
+
+//#include <conio.h>
+//#include <stdlib.h>
+//#include<stdio.h>
+//#include<windows.h>
+
+//#ifdef _DEBUG
+//#undef _DEBUG
+//#include <omp.h>
+//#define _DEBUG
+//#else
+//#include <omp.h>
+//#endif
+
+
+//#define NDEBUG // в начале файла исходного кода, перед включением заголовочного файла
 
 //int64_t **Attitude;
 /*int64_t **Attitude = new int64_t*;*/
 /*int64_t *Attitude = new int64_t[3000000000];*/
+/*int64_t **Attitude = new int64_t*[size_mass];*/
 
-class Array {
-public:
-	int64_t **Attitude = new int64_t*[size_mass];
-	Array(int _size)
-	{
-		srand(time(NULL));
-
-		/* Attitude = new int64_t*[1000000];*/
-
-		for (int row = 0; row < _size; row++)
-		{
-			Attitude[row] = new int64_t[10];
-			Attitude[row][0] = row;
-			for (int col = 0; col < 10; col++)
+class Array 
+{
+	public:
+		int64_t **Attitude;
+		Array(int _size, int64_t tuple_size, int64_t size_mass, string DEBUG)
 			{
-				Attitude[row][col] = rand() % 100000;
+				srand(time(NULL));
+				Attitude = new int64_t*[size_mass];
+				for (int row = 0; row < _size; row++)
+					{
+						Attitude[row] = new int64_t[tuple_size];
+						Attitude[row][0] = row;
+						for (int column = 0; column < tuple_size; column++)
+						{
+							Attitude[row][column] = rand() % 100000 + rand() % 100000;
 
-				/*cout << Attitude[row][col] << " ";*/
+							if (DEBUG == "Y")
+							{
+								cout << Attitude[row][column] << " ";
+							}
+						}
+						if (DEBUG == "Y")
+						{
+							cout << endl;
+						}
+					}
 			}
-			/*  cout << endl;*/
-		}
-	}
 };
 
 class Algorithm_for_column_store_DBMS
 {
 private:
-
 	float average_time[50], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
-public:void Calculation(int64_t **Att1, int64_t **Att2)
+public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass)
 {
 	int64_t tuples_connected;
 	
 	repeat_time_start = clock();
 
 	tuples_connected = 0;
+
 
 #pragma omp parallel num_threads(8)
 #pragma omp for reduction(+:tuples_connected)
@@ -76,11 +93,23 @@ public:void Calculation(int64_t **Att1, int64_t **Att2)
 		}
 	}
 
-	repeat_time_end = clock();
 
-	repeat_time_end = repeat_time_end / 1000;
+//	repeat_time_end = clock();
+//	repeat_time_calculation = repeat_time_end - repeat_time_start;
+//	average_time[repeat] = repeat_time_calculation;
+//	   Sum_average_time = 0;
+//	   for (int i = 0; i < 50; i++)
+//	   {
+//		   Sum_average_time = Sum_average_time + average_time[i];
+//	   }
+
+
+
+	repeat_time_end = clock();
+	repeat_time_calculation = (repeat_time_end - repeat_time_start) / 1000;
+	/*repeat_time_end = repeat_time_end / 1000;*/
 	cout << "______________________________________________________________________" << endl;
-	cout << "Среднее время выполнения алгоритма для колоночной СУБД = " << setw(3) << repeat_time_end << "  секунд." << endl;
+	cout << "Среднее время выполнения алгоритма для колоночной СУБД = " << setw(3) << repeat_time_calculation << "  секунд." << endl;
 	cout << "Кортежей соединилось = " << tuples_connected << endl;
 	cout << "______________________________________________________________________" << endl << endl;
 }
@@ -90,16 +119,25 @@ public:void Calculation(int64_t **Att1, int64_t **Att2)
 int main()
 {
 	setlocale(LC_ALL, "Russian");
+	int64_t tuple_size, size_mass;
+	string DEBUG;
 
-	cout << "Введите размер отношений";
+	cout << "Вывести отладочную информацию Y/N ? \n";
+	cin >> DEBUG;
 
+	cout << "______________________________________________________________________" << endl;
+	cout << "Введите количество кортежей \n";
 	cin >> size_mass;
+	assert(size_mass != NULL);
+	cout << "Введите количество столбцов \n";
+	cin >> tuple_size;
+	cout << "______________________________________________________________________" << endl;
 
-	Array test = Array(size_mass);
-	Array test2 = Array(size_mass);
+	Array Mass1 = Array(size_mass, tuple_size, size_mass, DEBUG);
+	Array Mass2 = Array(size_mass, tuple_size, size_mass, DEBUG);
 
 	class Algorithm_for_column_store_DBMS objColumn;
-	objColumn.Calculation(test.Attitude, test2.Attitude);
+	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass);
 
 	system("pause");
 	return 0;
