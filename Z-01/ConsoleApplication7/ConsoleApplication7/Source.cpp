@@ -71,9 +71,10 @@ class Algorithm_for_column_store_DBMS
 {
 	private:
 			float average_time[50], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
-	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, string DEBUG, int64_t Threads)
+			int64_t tuples_connected_R;
+	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, string DEBUG, int64_t Threads, string Average_result, int64_t Average_result_number)
 	{
-		int64_t tuples_connected;
+	/*	int64_t tuples_connected;
 		repeat_time_start = clock();
 		tuples_connected = 0;
 	
@@ -98,36 +99,95 @@ class Algorithm_for_column_store_DBMS
 		
 					}
 				}
-			}
+			}*/
 		
-			if (Average_result == "Y")
-			{
-				
+		if (Average_result == "Y")
+		{
+			for (int repeat = 0; repeat < Average_result_number; repeat++)
+				{
+					repeat_time_start = clock();
+					int64_t tuples_connected;
+					tuples_connected = 0;
 
-			}
+					#pragma omp	parallel num_threads(Threads)
+					#pragma omp	for reduction(+:tuples_connected)
+					for (int i = 0; i < size_mass; i++)
+					{
+						for (int j = 0; j < size_mass; j++)
+						{
+							for (int x = 0; x < 2; x++)
+							{
+								if (Att1[i][x] == Att2[j][x])
+								{
+									tuples_connected = tuples_connected + 1;
 
-			
+									if (DEBUG == "Yes")
+									{
+										cout << Att1[i][x] << "  " << Att2[j][x] << endl;
+									}
+								}
+							}
+						}
+					}
+					repeat_time_end = clock();
+					repeat_time_calculation = repeat_time_end - repeat_time_start;
+					average_time[repeat] = repeat_time_calculation;
+					tuples_connected_R = tuples_connected;
+				}
+				Sum_average_time = 0;
+				for (int i = 0; i < Average_result_number; i++)
+				   {
+					   Sum_average_time = Sum_average_time + average_time[i];
+				   }
+				Result = (Sum_average_time / 1000) / Average_result_number;	
 
-
-		//	repeat_time_end = clock();
-		//	repeat_time_calculation = repeat_time_end - repeat_time_start;
-		//	average_time[repeat] = repeat_time_calculation;
-		//	   Sum_average_time = 0;
-		//	   for (int i = 0; i < 50; i++)
-		//	   {
-		//		   Sum_average_time = Sum_average_time + average_time[i];
-		//	   }
-		
-			repeat_time_end = clock();
-			repeat_time_calculation = (repeat_time_end - repeat_time_start) / 1000;
-			/*repeat_time_end = repeat_time_end / 1000;*/
-			cout << "---------------------------------------------------------------------" << endl;
-			cout << "Среднее время выполнения алгоритма для колоночной СУБД = " << setw(3) << repeat_time_calculation << "  секунд." << endl;
-			cout << "Кортежей соединилось = " << tuples_connected << endl;
-			cout << "---------------------------------------------------------------------" << endl << endl;
+				float average_time_list;
+				for (int i = 0; i < average_time[i]; i++)
+				{
+					average_time_list = average_time[i] / 1000;
+					cout << "  " << average_time_list << "  секунд." << endl;
+				}
+				cout << "---------------------------------------------------------------------" << endl;
+				cout << "Среднее время выполнения алгоритма = " << setw(3) << Result << "  секунд." << endl;
+				cout << "Кортежей соединилось = " << tuples_connected_R << endl;
+				cout << "---------------------------------------------------------------------" << endl;
 		}
+		else
+		{
+			int64_t tuples_connected;
+			repeat_time_start = clock();
+			tuples_connected = 0;
+		
+			#pragma omp parallel num_threads(Threads)
+			#pragma omp for reduction(+:tuples_connected)
+				for (int i = 0; i < size_mass; i++)
+				{
+					for (int j = 0; j < size_mass; j++)
+					{
+						for (int x = 0; x < 2; x++)
+						{
+							if (Att1[i][x] == Att2[j][x])
+							{
+								tuples_connected = tuples_connected + 1;
+			
+								if (DEBUG == "Yes")
+								{
+									cout << Att1[i][x] << "  " << Att2[j][x] << endl;
+								}
+							}
+						}
+					}
+				}
+				repeat_time_end = clock();
+				repeat_time_calculation = repeat_time_end - repeat_time_start;
+				Result = repeat_time_calculation;
+				cout << "---------------------------------------------------------------------" << endl;
+				cout << "Время выполнения алгоритма = " << setw(3) << Result << "  секунд." << endl;
+				cout << "Кортежей соединилось = " << tuples_connected << endl;
+				cout << "---------------------------------------------------------------------" << endl << endl;
+		}	
+	}// Конец функции Calculation()
 };
-
 
 int main()
 {
@@ -160,7 +220,7 @@ int main()
 	Array Mass2 = Array(size_mass, tuple_size, size_mass, DEBUG);
 
 	class Algorithm_for_column_store_DBMS objColumn;
-	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, DEBUG, Threads);
+	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, DEBUG, Threads, Average_result, Average_result_number);
 
 	system("pause");
 	return 0;
