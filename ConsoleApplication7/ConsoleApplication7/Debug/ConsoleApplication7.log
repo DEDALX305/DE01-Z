@@ -1,0 +1,10 @@
+﻿  Source.cpp
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(30): error C2148: общий размер массива не должен превышать 0x7fffffff байт
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(30): warning C4307: *: переполнение целой константы
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(35): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(57): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(73): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(100): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(125): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(160): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+c:\users\alex-work\desktop\consoleapplication7\consoleapplication7\source.cpp(184): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
