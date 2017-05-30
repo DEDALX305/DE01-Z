@@ -7,6 +7,8 @@
 /*==============================================*/
 using namespace std;
 
+
+
 //#include <ctime>
 //#include <cstdint>
 //#include <malloc.h>
@@ -42,8 +44,7 @@ class Array
 	public:
 		int64_t **Attitude;
 		Array(int _size, int64_t tuple_size, int64_t size_mass, string DEBUG)
-			{
-				srand(time(NULL));
+			{		
 				Attitude = new int64_t*[size_mass];
 				for (int row = 0; row < _size; row++)
 					{
@@ -51,7 +52,7 @@ class Array
 						Attitude[row][0] = row;
 						for (int column = 0; column < tuple_size; column++)
 						{
-							Attitude[row][column] = rand() % 100000 + rand() % 100000;
+							Attitude[row][column] = rand() % 100000;
 
 							if (DEBUG == "Y")
 							{
@@ -68,76 +69,98 @@ class Array
 
 class Algorithm_for_column_store_DBMS
 {
-private:
-	float average_time[50], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
-public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass)
-{
-	int64_t tuples_connected;
-	
-	repeat_time_start = clock();
-
-	tuples_connected = 0;
-
-
-#pragma omp parallel num_threads(8)
-#pragma omp for reduction(+:tuples_connected)
-	for (int i = 0; i < size_mass; i++)
+	private:
+			float average_time[50], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
+	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, string DEBUG, int64_t Threads)
 	{
-		for (int j = 0; j < size_mass; j++)
-		{
-			if (Att1[i][1] == Att2[j][1])
+		int64_t tuples_connected;
+		repeat_time_start = clock();
+		tuples_connected = 0;
+	
+		#pragma omp parallel num_threads(Threads)
+		#pragma omp for reduction(+:tuples_connected)
+			for (int i = 0; i < size_mass; i++)
 			{
-				tuples_connected = tuples_connected + 1;
+				for (int j = 0; j < size_mass; j++)
+				{
+					for (int x = 0; x < 2; x++)
+					{
+						if (Att1[i][x] == Att2[j][x])
+						{
+							tuples_connected = tuples_connected + 1;
+		
+							if (DEBUG == "Yes")
+							{
+								cout << Att1[i][x] << "  " << Att2[j][x] << endl;
+							}
+							
+						}
+		
+					}
+				}
+			}
+		
+			if (Average_result == "Y")
+			{
+				
 
 			}
+
+			
+
+
+		//	repeat_time_end = clock();
+		//	repeat_time_calculation = repeat_time_end - repeat_time_start;
+		//	average_time[repeat] = repeat_time_calculation;
+		//	   Sum_average_time = 0;
+		//	   for (int i = 0; i < 50; i++)
+		//	   {
+		//		   Sum_average_time = Sum_average_time + average_time[i];
+		//	   }
+		
+			repeat_time_end = clock();
+			repeat_time_calculation = (repeat_time_end - repeat_time_start) / 1000;
+			/*repeat_time_end = repeat_time_end / 1000;*/
+			cout << "---------------------------------------------------------------------" << endl;
+			cout << "Среднее время выполнения алгоритма для колоночной СУБД = " << setw(3) << repeat_time_calculation << "  секунд." << endl;
+			cout << "Кортежей соединилось = " << tuples_connected << endl;
+			cout << "---------------------------------------------------------------------" << endl << endl;
 		}
-	}
-
-
-//	repeat_time_end = clock();
-//	repeat_time_calculation = repeat_time_end - repeat_time_start;
-//	average_time[repeat] = repeat_time_calculation;
-//	   Sum_average_time = 0;
-//	   for (int i = 0; i < 50; i++)
-//	   {
-//		   Sum_average_time = Sum_average_time + average_time[i];
-//	   }
-
-
-
-	repeat_time_end = clock();
-	repeat_time_calculation = (repeat_time_end - repeat_time_start) / 1000;
-	/*repeat_time_end = repeat_time_end / 1000;*/
-	cout << "______________________________________________________________________" << endl;
-	cout << "Среднее время выполнения алгоритма для колоночной СУБД = " << setw(3) << repeat_time_calculation << "  секунд." << endl;
-	cout << "Кортежей соединилось = " << tuples_connected << endl;
-	cout << "______________________________________________________________________" << endl << endl;
-}
 };
 
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	int64_t tuple_size, size_mass;
-	string DEBUG;
+	int64_t tuple_size, size_mass, Threads, Average_result_number;
+	string DEBUG, Average_result;
+	srand(time(NULL));
 
-	cout << "Вывести отладочную информацию Y/N ? \n";
+	cout << "Вывести отладочную информацию ? Y/N \n";
 	cin >> DEBUG;
+	cout << "Посчитать средний результат ? Y/N \n";
+	cin >> Average_result;
+	cout << "Сколько раз повторить тест ? \n";
+	cin >> Average_result_number;
+	assert(Average_result_number != NULL);
 
-	cout << "______________________________________________________________________" << endl;
+	cout << "---------------------------------------------------------------------" << endl;
 	cout << "Введите количество кортежей \n";
 	cin >> size_mass;
 	assert(size_mass != NULL);
 	cout << "Введите количество столбцов \n";
 	cin >> tuple_size;
-	cout << "______________________________________________________________________" << endl;
-
+	assert(tuple_size != NULL);
+	cout << "Введите количество нитей \n";
+	cin >> Threads;
+	assert(Threads != NULL);
+	cout << "---------------------------------------------------------------------" << endl;
+	
 	Array Mass1 = Array(size_mass, tuple_size, size_mass, DEBUG);
 	Array Mass2 = Array(size_mass, tuple_size, size_mass, DEBUG);
 
 	class Algorithm_for_column_store_DBMS objColumn;
-	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass);
+	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, DEBUG, Threads);
 
 	system("pause");
 	return 0;
