@@ -7,38 +7,6 @@
 /*==============================================*/
 using namespace std;
 
-
-
-//#include <ctime>
-//#include <cstdint>
-//#include <malloc.h>
-//#include <new>
-//#include <cstdlib>
-//#include <iostream>
-
-//#include <cstring>
-
-//#include <conio.h>
-//#include <stdlib.h>
-//#include<stdio.h>
-//#include<windows.h>
-
-//#ifdef _DEBUG
-//#undef _DEBUG
-//#include <omp.h>
-//#define _DEBUG
-//#else
-//#include <omp.h>
-//#endif
-
-
-//#define NDEBUG // в начале файла исходного кода, перед включением заголовочного файла
-
-//int64_t **Attitude;
-/*int64_t **Attitude = new int64_t*;*/
-/*int64_t *Attitude = new int64_t[3000000000];*/
-/*int64_t **Attitude = new int64_t*[size_mass];*/
-
 class Array 
 {
 	public:
@@ -74,33 +42,6 @@ class Algorithm_for_column_store_DBMS
 			int64_t tuples_connected_R;
 	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, string DEBUG, int64_t Threads, string Average_result, int64_t Average_result_number)
 	{
-	/*	int64_t tuples_connected;
-		repeat_time_start = clock();
-		tuples_connected = 0;
-	
-		#pragma omp parallel num_threads(Threads)
-		#pragma omp for reduction(+:tuples_connected)
-			for (int i = 0; i < size_mass; i++)
-			{
-				for (int j = 0; j < size_mass; j++)
-				{
-					for (int x = 0; x < 2; x++)
-					{
-						if (Att1[i][x] == Att2[j][x])
-						{
-							tuples_connected = tuples_connected + 1;
-		
-							if (DEBUG == "Yes")
-							{
-								cout << Att1[i][x] << "  " << Att2[j][x] << endl;
-							}
-							
-						}
-		
-					}
-				}
-			}*/
-		
 		if (Average_result == "Y")
 		{
 			for (int repeat = 0; repeat < Average_result_number; repeat++)

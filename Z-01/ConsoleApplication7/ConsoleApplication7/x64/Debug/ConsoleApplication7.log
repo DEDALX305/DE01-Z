@@ -1,12 +1,12 @@
 ﻿  Source.cpp
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(108): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(112): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(132): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(158): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(49): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(53): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(73): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(99): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(102): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(122): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(138): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(160): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
 g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(161): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(181): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(197): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(219): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
-g:\институт, work и др\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(220): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
   ConsoleApplication7.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\Z-01\ConsoleApplication7\x64\Debug\ConsoleApplication7.exe
   ConsoleApplication7.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\Z-01\ConsoleApplication7\x64\Debug\ConsoleApplication7.pdb (Partial PDB)
