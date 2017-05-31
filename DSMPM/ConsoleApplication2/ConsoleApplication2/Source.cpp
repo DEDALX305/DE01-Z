@@ -1,24 +1,9 @@
 #include <iostream> // для оператора cout
 #include <cassert>  // для функции assert
-
 /*==============================================*/
-
-//#include <iomanip>   // для функции setw
-//#include <string>  // строчный тип данных
-//#include <time.h> // для функций time, clock
-//#include <omp.h> // для функций MPI
-//#include <cstring>
-//#include <string>
-//#include <conio.h>
-//#include <stdlib.h>
-//#include <stdio.h>
-//#include <windows.h>
-
-#define NDEBUG
-
-
-
+#define DEBUG
 using namespace std;
+/*==============================================*/
 
 class Query_manager
 {
@@ -42,11 +27,11 @@ public:
 	Memory_manager(float Size1, float Size2, float SFastMemory, float SMainMemory, float MainMemThroughput)
 	{
 /*Константные переменные --------------------------------------------------------------*/
-		FragMM = 1;
-		GDAfrag_t1 = 1;
-		ClearFM = 1;
-		SendAF = 1;
-		FragMM = 1; //(Large_ratio / Number_of_fragments);
+		FragMM = 1;// указывает время, затраченное на фрагментацию данных в быстрой па-мяти;
+		GDAfrag_t1 = 1; //время затраченное на получение менеджером памяти адресов подфраг-ментов хранящихся в быстрой памяти 
+		ClearFM = 1;//время, затраченное на очистку быстрой памяти, задается константно;
+		SendAF = 1; //время, затраченное на отправку адресов подфрагментов хранящихся в быстрой памяти менеджеру параллельных агентов.
+		FragMM = 1; //указывает время, затраченное на фрагментацию данных в быстрой па-мяти;
 /*-------------------------------------------------------------------------------------*/
 
 		if (Size1 > Size2)
@@ -59,36 +44,33 @@ public:
 			Small_ratio = Size1;
 		}
 
-		Ftml = Small_ratio / MainMemThroughput;
+		Ftml = Small_ratio / MainMemThroughput; // Указывает время, затраченное на загрузку меньшего отношения в быструю память.
 		assert(Ftml > NULL);
 #ifdef DEBUG 
-		cout << "Ftml " << Ftml << endl;
+	cout << "Ftml " << Ftml << endl;
 #endif
 		
-		Number_of_fragments = Large_ratio / (((SFastMemory - Small_ratio) - Small_ratio) / 2);
+		Number_of_fragments = Large_ratio / (((SFastMemory - Small_ratio) - Small_ratio) / 2); // Количество фрагментов.
 		assert(Number_of_fragments > 1);
 #ifdef DEBUG 
-		cout << "Number_of_fragments " << Number_of_fragments << endl;
+	cout << "Number_of_fragments " << Number_of_fragments << endl;
 #endif
-		
-		
-		SizeFragmentLarge_ratio = ((SFastMemory - Small_ratio) - Small_ratio) / 2;
+			
+		SizeFragmentLarge_ratio = ((SFastMemory - Small_ratio) - Small_ratio) / 2; // Размер фрагмента большого отношения.
 		assert(SizeFragmentLarge_ratio > NULL);
 #ifdef DEBUG 
-		cout << "SizeFragmentLarge_ratio " << SizeFragmentLarge_ratio << endl;
+	cout << "SizeFragmentLarge_ratio " << SizeFragmentLarge_ratio << endl;
 #endif
-		
 
-		SizeResultantSubfragment = SizeFragmentLarge_ratio + Small_ratio;
+		SizeResultantSubfragment = SizeFragmentLarge_ratio + Small_ratio; // Размер результирующего отношения
 		assert(SizeResultantSubfragment > NULL);
 #ifdef DEBUG 
-		cout << "SizeResultantSubfragment " << SizeResultantSubfragment << endl;
+	cout << "SizeResultantSubfragment " << SizeResultantSubfragment << endl;
 #endif
 		
-
 		OutFragM = SizeResultantSubfragment / MainMemThroughput;
 #ifdef DEBUG 
-		cout << "OutFragM " << OutFragM << endl;
+	cout << "OutFragM " << OutFragM << endl;
 #endif
 			
 	}
@@ -99,19 +81,20 @@ class Manager_of_parallel_agents
 public:
 	float t_g, t_f, MesAfrag,  GDAfrag_t2, ProcRequest;
 	
-	Manager_of_parallel_agents(float k1, float k2, float FastMemThroughputm, float PerfParallelAgentManager, float MainMemThroughput)
+	Manager_of_parallel_agents(float k1, float FastMemThroughputm, float PerfParallelAgentManager, float MainMemThroughput)
 	{
 /*Константные переменные --------------------------------------------------------------*/
-		t_g = 1;
-		t_f = 1;
-		GDAfrag_t2 = 1;
-		MesAfrag = 1;
+		t_g = 1;// Время затраченное на создание группы агентов.
+		t_f = 1; // Время проверки свободных виртуальных процессоров. 
+		GDAfrag_t2 = 1;// Время затраченное на отправку менеджером памяти адресов подфрагментов хранящихся в быстрой памяти менеджеру параллельных агентов.
+		MesAfrag = 1;// Время, затраченное на сообщение адресов подфрагментов хранящихся в быстрой памяти группе параллельных агентов.
 /*-------------------------------------------------------------------------------------*/
-		
-		/*ProcRequest = (k1 / FastMemThroughputm * k2 / MainMemThroughput) * PerfParallelAgentManager;*/
-		ProcRequest = (k1 / FastMemThroughputm ) * PerfParallelAgentManager;
-		assert(ProcRequest > NULL);
-		cout << "ProcRequest " << ProcRequest << endl;
+
+		ProcRequest = (k1 / FastMemThroughputm * 1000) / PerfParallelAgentManager;
+		assert(ProcRequest > NULL);	
+#ifdef DEBUG 
+	cout << "ProcRequest " << ProcRequest << endl;
+#endif
 	}
 };
 
@@ -126,28 +109,11 @@ int main()
 	float	N_ProcRequest, TALL, FastMemThroughput, PerfParallelAgentManager, t_0, k1, k2, SizeCort;
 /*Константные переменные --------------------------------------------------------------*/
 	TimeFinal = 1;
-	k1 = 1000;
-	k2 = 9000;
+	k1 = 250000;
 /*-------------------------------------------------------------------------------------*/
-
-	//cout << "Введите размер отношений \n" ;
-	//cout << "Отношение 1 \n";
-	//cin >> Size1;
-	//cout << "Отношение 2 \n";
-	//cin >> Size2;
-	//cout << "Введите размер быстрой памяти \n";
-	//cin >> SFastMemory;
-	//cout << "Введите размер основной памяти \n";
-	//cin >> SMainMemory;
-	//cout << "Введите пропускную способность основной памяти \n";
-	//cin >> MainMemThroughput;
-	//cout << "Введите пропускную способность быстрой памяти \n";
-	//cin >> FastMemThroughput;
-	//cout << "Введите производительсноть менеджера паралельных агентов \n";
-	//cin >> PerfParallelAgentManager;
 	
 	cout << "Отношение 1 \n";
-	Size1 = 170000;
+	Size1 = 100000;
 	assert(Size1 > NULL);
 	assert(Size1 != NULL);
 	cout << "Отношение 2 \n";
@@ -171,12 +137,13 @@ int main()
 	assert(FastMemThroughput > NULL);
 	assert(FastMemThroughput != NULL);
 	cout << "Введите производительсноть менеджера паралельных агентов \n";
-	PerfParallelAgentManager = 36;
+	PerfParallelAgentManager = 4;
 	assert(PerfParallelAgentManager > NULL);
 	assert(PerfParallelAgentManager != NULL);
 
+
 	Memory_manager* memory_manager = new Memory_manager(Size1, Size2, SFastMemory, SMainMemory, MainMemThroughput);
-	Manager_of_parallel_agents* manager_of_parallel_agents = new Manager_of_parallel_agents(k1, k2, FastMemThroughput, PerfParallelAgentManager, MainMemThroughput);
+	Manager_of_parallel_agents* manager_of_parallel_agents = new Manager_of_parallel_agents(k1, FastMemThroughput, PerfParallelAgentManager, MainMemThroughput);
 	Query_manager* query_manager = new Query_manager();
 /*TimeFirst - подготовительный шаг------------------------------------------------------------------*/
 	t_load = memory_manager->Ftml + memory_manager->FragMM + memory_manager->GDAfrag_t1 + manager_of_parallel_agents->GDAfrag_t2;
@@ -184,30 +151,33 @@ int main()
 #ifdef DEBUG 
 	cout << "t_load " << t_load << endl;
 #endif
-	
 	t_0 = query_manager->InOut + memory_manager->FragMM + manager_of_parallel_agents->t_f + manager_of_parallel_agents->t_g + t_load;
 	assert(t_0 > NULL);
 #ifdef DEBUG 
 	cout << "t_0 " << t_0 << endl;
 #endif
-	
-	TimeFirst = t_0 + t_load;
+	TimeFirst = t_0 + t_load; 
 /*Processing_steps - Шаги обработки----------------------------------------------------------------*/
 	Time_j = manager_of_parallel_agents->MesAfrag + manager_of_parallel_agents->ProcRequest;
 	assert(Time_j > NULL);
+#ifdef DEBUG 
+	cout << "Time_j " << t_load << endl;
+#endif
 	time_j = memory_manager->OutFragM + memory_manager->ClearFM + memory_manager->SendAF;
 	assert(time_j > NULL);
+#ifdef DEBUG 
+	cout << "time_j " << t_load << endl;
+#endif
 	N_ProcessingSteps = (Time_j + time_j) * memory_manager->Number_of_fragments;
+#ifdef DEBUG 
+	cout << "N_ProcessingSteps " << N_ProcessingSteps << endl;
+#endif
 /*TimeFinal - Завершающий шаг ---------------------------------------------------------------------*/
 	cout << "Подсчет результатов  \n";
 	TALL = TimeFirst + N_ProcessingSteps + TimeFinal;
 	cout << TALL << " Условных единиц" << endl;
-
-	
-
-
 /*-------------------------------------------------------------------------------------------------*/
 	
-	system("pause");
+	system("Pause");
 	return 0;
 }

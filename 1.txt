@@ -28,3 +28,14 @@
 /*int64_t **Attitude = new int64_t*;*/
 /*int64_t *Attitude = new int64_t[3000000000];*/
 /*int64_t **Attitude = new int64_t*[size_mass];*/
+
+//#include <iomanip>   // для функции setw
+//#include <string>  // строчный тип данных
+//#include <time.h> // для функций time, clock
+//#include <omp.h> // для функций MPI
+//#include <cstring>
+//#include <string>
+//#include <conio.h>
+//#include <stdlib.h>
+//#include <stdio.h>
+//#include <windows.h>

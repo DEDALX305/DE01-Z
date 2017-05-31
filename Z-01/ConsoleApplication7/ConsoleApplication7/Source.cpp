@@ -191,11 +191,11 @@ int main()
 	class InputData start;
 	start.Configuration();
 	
-	cout << "Повторить расчеты Y/N ?" << endl;
+	cout << "Повторить расчеты Y/N ? \n" << endl;
 	cin >> Repeat;
 	do {
 		start.Configuration();
-		cout << "Повторить расчеты Y/N ?";
+		cout << "Повторить расчеты Y/N ? \n";
 		cin >> Repeat;
 	}	while (Repeat == "Y");
 

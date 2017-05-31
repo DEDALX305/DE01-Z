@@ -1,0 +1,26 @@
+﻿  Source.cpp
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(65): error C2065: Memory_manager: необъявленный идентификатор
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(65): error C2065: objtimefirst: необъявленный идентификатор
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): error C2065: objtimefirst: необъявленный идентификатор
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): error C2228: выражение слева от ".SizeResultantSubfragment" должно представлять класс, структуру или объединение
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): error C2065: timefirst: необъявленный идентификатор
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): error C2227: выражение слева от "->SizeFragmentLarge_ratio" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): error C2227: выражение слева от "->Small_ratio" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(68): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(69): error C2065: timefirst: необъявленный идентификатор
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(69): error C2227: выражение слева от "->SizeResultantSubfragment" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(69): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(73): error C2065: timefirst: необъявленный идентификатор
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(73): error C2227: выражение слева от "->OutFragM" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(73): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(73): error C2227: выражение слева от "->SizeResultantSubfragment" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(73): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(83): error C2065: timefirst: необъявленный идентификатор
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(83): error C2227: выражение слева от "->OutFragM" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(83): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(83): error C2227: выражение слева от "->ClearFM" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(83): note: тип: unknown-type
+g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(83): error C2227: выражение слева от "->SendAF" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(83): note: тип: unknown-type
