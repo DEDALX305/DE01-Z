@@ -191,7 +191,7 @@ int main()
 	class InputData start;
 	start.Configuration();
 	
-	cout << "Повторить расчеты ?" << endl;
+	cout << "Повторить расчеты Y/N ?" << endl;
 	cin >> Repeat;
 	do {
 		start.Configuration();

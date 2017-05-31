@@ -14,6 +14,10 @@
 //#include <stdio.h>
 //#include <windows.h>
 
+#define NDEBUG
+
+
+
 using namespace std;
 
 class Query_manager
@@ -57,21 +61,36 @@ public:
 
 		Ftml = Small_ratio / MainMemThroughput;
 		assert(Ftml > NULL);
+#ifdef DEBUG 
 		cout << "Ftml " << Ftml << endl;
+#endif
+		
 		Number_of_fragments = Large_ratio / (((SFastMemory - Small_ratio) - Small_ratio) / 2);
 		assert(Number_of_fragments > 1);
-		
+#ifdef DEBUG 
 		cout << "Number_of_fragments " << Number_of_fragments << endl;
-		SizeFragmentLarge_ratio = Number_of_fragments;
+#endif
+		
+		
+		SizeFragmentLarge_ratio = ((SFastMemory - Small_ratio) - Small_ratio) / 2;
 		assert(SizeFragmentLarge_ratio > NULL);
+#ifdef DEBUG 
 		cout << "SizeFragmentLarge_ratio " << SizeFragmentLarge_ratio << endl;
+#endif
+		
 
-		SizeResultantSubfragment = SizeFragmentLarge_ratio + Large_ratio;
+		SizeResultantSubfragment = SizeFragmentLarge_ratio + Small_ratio;
 		assert(SizeResultantSubfragment > NULL);
+#ifdef DEBUG 
 		cout << "SizeResultantSubfragment " << SizeResultantSubfragment << endl;
+#endif
+		
 
 		OutFragM = SizeResultantSubfragment / MainMemThroughput;
-		cout << "OutFragM " << OutFragM << endl;		
+#ifdef DEBUG 
+		cout << "OutFragM " << OutFragM << endl;
+#endif
+			
 	}
 };
 
@@ -99,12 +118,15 @@ public:
 int main()
 {
 	setlocale(LC_ALL, "Russian");
+#ifdef DEBUG 
+	cout << " DEBUG MODE!" << endl;
+#endif
 	
 	float	Size1, Size2, SFastMemory, SMainMemory, MainMemThroughput, TimeFirst, TimeFinal, t_load, Time_j, time_j, N_ProcessingSteps;
 	float	N_ProcRequest, TALL, FastMemThroughput, PerfParallelAgentManager, t_0, k1, k2, SizeCort;
 /*Константные переменные --------------------------------------------------------------*/
 	TimeFinal = 1;
-	k1 = 5400;
+	k1 = 1000;
 	k2 = 9000;
 /*-------------------------------------------------------------------------------------*/
 
@@ -125,31 +147,31 @@ int main()
 	//cin >> PerfParallelAgentManager;
 	
 	cout << "Отношение 1 \n";
-	Size1 = 10000;
+	Size1 = 170000;
 	assert(Size1 > NULL);
 	assert(Size1 != NULL);
 	cout << "Отношение 2 \n";
-	Size2 = 500;
+	Size2 = 6000;
 	assert(Size2 > NULL);
 	assert(Size2 != NULL);
 	cout << "Введите размер быстрой памяти \n";
-	SFastMemory = 8192;
+	SFastMemory = 16000;
 	assert(SFastMemory > NULL);
 	assert(SFastMemory != NULL);
 	cout << "Введите размер основной памяти \n";
-	SMainMemory = 8192;
+	SMainMemory = 393000;
 	assert(SMainMemory > NULL);
 	assert(SMainMemory != NULL);
 	cout << "Введите пропускную способность основной памяти \n";
-	MainMemThroughput = 10667;
+	MainMemThroughput = 90000;
 	assert(MainMemThroughput > NULL);
 	assert(MainMemThroughput != NULL);
 	cout << "Введите пропускную способность быстрой памяти \n";
-	FastMemThroughput = 10667;
+	FastMemThroughput = 400000;
 	assert(FastMemThroughput > NULL);
 	assert(FastMemThroughput != NULL);
 	cout << "Введите производительсноть менеджера паралельных агентов \n";
-	PerfParallelAgentManager = 8;
+	PerfParallelAgentManager = 36;
 	assert(PerfParallelAgentManager > NULL);
 	assert(PerfParallelAgentManager != NULL);
 
@@ -159,10 +181,16 @@ int main()
 /*TimeFirst - подготовительный шаг------------------------------------------------------------------*/
 	t_load = memory_manager->Ftml + memory_manager->FragMM + memory_manager->GDAfrag_t1 + manager_of_parallel_agents->GDAfrag_t2;
 	assert(t_load > NULL);
+#ifdef DEBUG 
 	cout << "t_load " << t_load << endl;
+#endif
+	
 	t_0 = query_manager->InOut + memory_manager->FragMM + manager_of_parallel_agents->t_f + manager_of_parallel_agents->t_g + t_load;
 	assert(t_0 > NULL);
+#ifdef DEBUG 
 	cout << "t_0 " << t_0 << endl;
+#endif
+	
 	TimeFirst = t_0 + t_load;
 /*Processing_steps - Шаги обработки----------------------------------------------------------------*/
 	Time_j = manager_of_parallel_agents->MesAfrag + manager_of_parallel_agents->ProcRequest;
@@ -174,6 +202,10 @@ int main()
 	cout << "Подсчет результатов  \n";
 	TALL = TimeFirst + N_ProcessingSteps + TimeFinal;
 	cout << TALL << " Условных единиц" << endl;
+
+	
+
+
 /*-------------------------------------------------------------------------------------------------*/
 	
 	system("pause");
