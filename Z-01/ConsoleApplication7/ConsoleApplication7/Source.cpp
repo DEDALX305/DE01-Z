@@ -11,10 +11,10 @@ class Array
 {
 	public:
 		int64_t **Attitude;
-		Array(int _size, int64_t tuple_size, int64_t size_mass, string DEBUG)
+		Array(int64_t tuple_size, int64_t size_mass, string DEBUG)
 			{		
 				Attitude = new int64_t*[size_mass];
-				for (int row = 0; row < _size; row++)
+				for (int row = 0; row < size_mass; row++)
 					{
 						Attitude[row] = new int64_t[tuple_size];
 						Attitude[row][0] = row;
@@ -40,7 +40,8 @@ class Algorithm_for_column_store_DBMS
 	private:
 			float average_time[50], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
 			int64_t tuples_connected_R;
-	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, string DEBUG, int64_t Threads, string Average_result, int64_t Average_result_number)
+
+	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, string DEBUG, int64_t Threads, string Average_result, int64_t Average_result_number, int64_t tuple_size)
 	{
 		if (Average_result == "Y")
 		{
@@ -56,7 +57,7 @@ class Algorithm_for_column_store_DBMS
 					{
 						for (int j = 0; j < size_mass; j++)
 						{
-							for (int x = 0; x < 2; x++)
+							for (int x = 0; x < tuple_size; x++)
 							{
 								if (Att1[i][x] == Att2[j][x])
 								{
@@ -105,7 +106,7 @@ class Algorithm_for_column_store_DBMS
 				{
 					for (int j = 0; j < size_mass; j++)
 					{
-						for (int x = 0; x < 2; x++)
+						for (int x = 0; x < tuple_size; x++)
 						{
 							if (Att1[i][x] == Att2[j][x])
 							{
@@ -121,7 +122,7 @@ class Algorithm_for_column_store_DBMS
 				}
 				repeat_time_end = clock();
 				repeat_time_calculation = repeat_time_end - repeat_time_start;
-				Result = repeat_time_calculation;
+				Result = repeat_time_calculation / 1000;
 				cout << "---------------------------------------------------------------------" << endl;
 				cout << "Время выполнения алгоритма = " << setw(3) << Result << "  секунд." << endl;
 				cout << "Кортежей соединилось = " << tuples_connected << endl;
@@ -133,7 +134,7 @@ class Algorithm_for_column_store_DBMS
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	int64_t tuple_size, size_mass, Threads, Average_result_number;
+	int64_t tuple_size, size_mass, size_mass2, Threads, Average_result_number;
 	string DEBUG, Average_result;
 	srand(time(NULL));
 
@@ -141,27 +142,44 @@ int main()
 	cin >> DEBUG;
 	cout << "Посчитать средний результат ? Y/N \n";
 	cin >> Average_result;
-	cout << "Сколько раз повторить тест ? \n";
-	cin >> Average_result_number;
-	assert(Average_result_number != NULL);
-
+	if (Average_result == "Y")
+	{
+		cout << "Сколько раз повторить тест ? \n";
+		cin >> Average_result_number;
+		assert(Average_result_number != NULL);
+		assert(Average_result_number > NULL);
+	}
+	else
+	{
+		Average_result_number = 1;
+	}
+	
 	cout << "---------------------------------------------------------------------" << endl;
-	cout << "Введите количество кортежей \n";
+	cout << "Введите количество кортежей 1 отношения \n";
 	cin >> size_mass;
 	assert(size_mass != NULL);
+	assert(size_mass > NULL);
+	cout << "Введите количество кортежей 2 отношения \n";
+	cin >> size_mass2;
+	assert(size_mass2 != NULL);
+	assert(size_mass2 > NULL);
 	cout << "Введите количество столбцов \n";
 	cin >> tuple_size;
 	assert(tuple_size != NULL);
+	assert(tuple_size > NULL);
 	cout << "Введите количество нитей \n";
 	cin >> Threads;
 	assert(Threads != NULL);
+	assert(Threads > NULL);
 	cout << "---------------------------------------------------------------------" << endl;
 	
-	Array Mass1 = Array(size_mass, tuple_size, size_mass, DEBUG);
-	Array Mass2 = Array(size_mass, tuple_size, size_mass, DEBUG);
+	Array Mass1 = Array(tuple_size, size_mass, DEBUG);
+	size_mass = size_mass2;
+	cout << endl;
+	Array Mass2 = Array(tuple_size, size_mass2, DEBUG);
 
 	class Algorithm_for_column_store_DBMS objColumn;
-	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, DEBUG, Threads, Average_result, Average_result_number);
+	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, DEBUG, Threads, Average_result, Average_result_number, tuple_size);
 
 	system("pause");
 	return 0;

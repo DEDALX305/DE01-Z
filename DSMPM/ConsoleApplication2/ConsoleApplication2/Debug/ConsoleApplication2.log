@@ -1,3 +1,4 @@
 ﻿  Source.cpp
-  ConsoleApplication2.vcxproj -> F:\Google Диск\Институт\Рекачинский Диплом\Диплом\Эмулятор\ConsoleApplication2\Debug\ConsoleApplication2.exe
-  ConsoleApplication2.vcxproj -> F:\Google Диск\Институт\Рекачинский Диплом\Диплом\Эмулятор\ConsoleApplication2\Debug\ConsoleApplication2.pdb (Partial PDB)
+c:\users\alex-work\documents\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(104): warning C4101: SizeCort: неиспользованная локальная переменная
+  ConsoleApplication2.vcxproj -> C:\Users\ALEX-WORK\Documents\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.exe
+  ConsoleApplication2.vcxproj -> C:\Users\ALEX-WORK\Documents\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.pdb (Partial PDB)
