@@ -5,6 +5,6 @@ c:\users\alex-work\documents\github\de01-z\z-01\consoleapplication7\consoleappli
 c:\users\alex-work\documents\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(100): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
 c:\users\alex-work\documents\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(103): warning C4244: аргумент: преобразование "int64_t" в "int", возможна потеря данных
 c:\users\alex-work\documents\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(123): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
-c:\users\alex-work\documents\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(139): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\alex-work\documents\github\de01-z\z-01\consoleapplication7\consoleapplication7\source.cpp(188): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   ConsoleApplication7.vcxproj -> C:\Users\ALEX-WORK\Documents\GitHub\DE01-Z\Z-01\ConsoleApplication7\x64\Debug\ConsoleApplication7.exe
   ConsoleApplication7.vcxproj -> C:\Users\ALEX-WORK\Documents\GitHub\DE01-Z\Z-01\ConsoleApplication7\x64\Debug\ConsoleApplication7.pdb (Partial PDB)

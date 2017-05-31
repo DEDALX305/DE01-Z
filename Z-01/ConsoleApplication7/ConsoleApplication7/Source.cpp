@@ -41,7 +41,7 @@ class Algorithm_for_column_store_DBMS
 			float average_time[50], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
 			int64_t tuples_connected_R;
 
-	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, string DEBUG, int64_t Threads, string Average_result, int64_t Average_result_number, int64_t tuple_size)
+	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, int64_t size_mass2, string DEBUG, int64_t Threads, string Average_result, int64_t Average_result_number, int64_t tuple_size)
 	{
 		if (Average_result == "Y")
 		{
@@ -104,7 +104,7 @@ class Algorithm_for_column_store_DBMS
 			#pragma omp for reduction(+:tuples_connected)
 				for (int i = 0; i < size_mass; i++)
 				{
-					for (int j = 0; j < size_mass; j++)
+					for (int j = 0; j < size_mass2; j++)
 					{
 						for (int x = 0; x < tuple_size; x++)
 						{
@@ -131,12 +131,12 @@ class Algorithm_for_column_store_DBMS
 	}// Конец функции Calculation()
 };
 
-int main()
+class InputData 
 {
-	setlocale(LC_ALL, "Russian");
+	public: void Configuration()
+	{
 	int64_t tuple_size, size_mass, size_mass2, Threads, Average_result_number;
 	string DEBUG, Average_result;
-	srand(time(NULL));
 
 	cout << "Вывести отладочную информацию ? Y/N \n";
 	cin >> DEBUG;
@@ -153,7 +153,7 @@ int main()
 	{
 		Average_result_number = 1;
 	}
-	
+
 	cout << "---------------------------------------------------------------------" << endl;
 	cout << "Введите количество кортежей 1 отношения \n";
 	cin >> size_mass;
@@ -172,14 +172,32 @@ int main()
 	assert(Threads != NULL);
 	assert(Threads > NULL);
 	cout << "---------------------------------------------------------------------" << endl;
-	
+
 	Array Mass1 = Array(tuple_size, size_mass, DEBUG);
-	size_mass = size_mass2;
 	cout << endl;
 	Array Mass2 = Array(tuple_size, size_mass2, DEBUG);
 
 	class Algorithm_for_column_store_DBMS objColumn;
-	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, DEBUG, Threads, Average_result, Average_result_number, tuple_size);
+	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, size_mass2, DEBUG, Threads, Average_result, Average_result_number, tuple_size);
+	}
+};
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	srand(time(NULL));
+	string Repeat;
+
+	class InputData start;
+	start.Configuration();
+	
+	cout << "Повторить расчеты ?" << endl;
+	cin >> Repeat;
+	do {
+		start.Configuration();
+		cout << "Повторить расчеты Y/N ?";
+		cin >> Repeat;
+	}	while (Repeat == "Y");
 
 	system("pause");
 	return 0;
