@@ -37,6 +37,7 @@ public:
 	};
 };
 
+
 class Manager_of_parallel_agents
 {
 public:
@@ -62,10 +63,10 @@ public:
 		/*------------------------------Time_j----------------------------------*/
 
 		/*N_ProcessingSteps = (Time_j + time_j) * memory_manager->Number_of_fragments;*/
-		Memory_manager* objtimefirst;
-		//Memory_manager* timefirst = new Memory_manager;
+		/*Memory_manager* objtimefirst;*/
+		Memory_manager timefirst;
 
-		objtimefirst.SizeResultantSubfragment = timefirst->SizeFragmentLarge_ratio + timefirst->Small_ratio; // Размер результирующего отношения
+		timefirst.SizeResultantSubfragment = timefirst->SizeFragmentLarge_ratio + timefirst->Small_ratio; // Размер результирующего отношения
 		assert(timefirst->SizeResultantSubfragment > NULL);
 #ifdef DEBUG 
 		cout << "SizeResultantSubfragment " << SizeResultantSubfragment << endl;

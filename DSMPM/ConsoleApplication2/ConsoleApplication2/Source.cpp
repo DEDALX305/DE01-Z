@@ -105,35 +105,48 @@ int main()
 	cout << " DEBUG MODE!" << endl;
 #endif
 	
-	float	Size1, Size2, SFastMemory, SMainMemory, MainMemThroughput, TimeFirst, TimeFinal, t_load, Time_j, time_j, N_ProcessingSteps;
+	float	_Size1, Size1, _Size2, Size2, SFastMemory, SMainMemory, MainMemThroughput, TimeFirst, TimeFinal, t_load, Time_j, time_j, N_ProcessingSteps;
 	float	N_ProcRequest, TALL, FastMemThroughput, PerfParallelAgentManager, t_0, k1, k2, SizeCort;
 /*Константные переменные --------------------------------------------------------------*/
 	TimeFinal = 1;
-	k1 = 250000;
+	k1 = 2500000;
 /*-------------------------------------------------------------------------------------*/
 	
 	cout << "Отношение 1 \n";
-	Size1 = 100000;
+	Size1 = 10000000;
+	/*cin >> _Size1;*/
+	/*Size1 = _Size1 / ((SFastMemory / 100 ) * 38);*/
 	assert(Size1 > NULL);
 	assert(Size1 != NULL);
+#ifdef DEBUG 
+		cout << "Size1 " << Size1 << endl;
+#endif
+
 	cout << "Отношение 2 \n";
-	Size2 = 6000;
+	Size2 = 1000000;
+	/*cin >> _Size2;*/
+	/*Size2 = _Size2 / ((SMainMemory / 100) * 44);*/
 	assert(Size2 > NULL);
 	assert(Size2 != NULL);
+#ifdef DEBUG 
+	cout << "Size2 " << Size2 << endl;
+#endif
+
 	cout << "Введите размер быстрой памяти \n";
-	SFastMemory = 16000;
+	SFastMemory = 16000000;
 	assert(SFastMemory > NULL);
 	assert(SFastMemory != NULL);
 	cout << "Введите размер основной памяти \n";
-	SMainMemory = 393000;
+	SMainMemory = 39300000;
 	assert(SMainMemory > NULL);
 	assert(SMainMemory != NULL);
+
 	cout << "Введите пропускную способность основной памяти \n";
-	MainMemThroughput = 90000;
+	MainMemThroughput = 900000;
 	assert(MainMemThroughput > NULL);
 	assert(MainMemThroughput != NULL);
 	cout << "Введите пропускную способность быстрой памяти \n";
-	FastMemThroughput = 400000;
+	FastMemThroughput = 4000000;
 	assert(FastMemThroughput > NULL);
 	assert(FastMemThroughput != NULL);
 	cout << "Введите производительсноть менеджера паралельных агентов \n";

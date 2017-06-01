@@ -1,9 +1,9 @@
-#include <iostream>   // для оператора cout
-#include <iomanip>   // для функции setw
-#include <cassert>  // для функции assert
-#include <string>  // строчный тип данных
-#include <time.h> // для функций time, clock
-#include <omp.h> // для функций MPI
+п»ї#include <iostream>   // РґР»СЏ РѕРїРµСЂР°С‚РѕСЂР° cout
+#include <iomanip>   // РґР»СЏ С„СѓРЅРєС†РёРё setw
+#include <cassert>  // РґР»СЏ С„СѓРЅРєС†РёРё assert
+#include <string>  // СЃС‚СЂРѕС‡РЅС‹Р№ С‚РёРї РґР°РЅРЅС‹С…
+#include <omp.h>  // РґР»СЏ С„СѓРЅРєС†РёР№ MPI
+#include <ctime> // РґР»СЏ С„СѓРЅРєС†РёР№ time, clock
 /*==============================================*/
 using namespace std;
 
@@ -87,11 +87,11 @@ class Algorithm_for_column_store_DBMS
 				for (int i = 0; i < average_time[i]; i++)
 				{
 					average_time_list = average_time[i] / 1000;
-					cout << "  " << average_time_list << "  секунд." << endl;
+					cout << "  " << average_time_list << "  СЃРµРєСѓРЅРґ." << endl;
 				}
 				cout << "---------------------------------------------------------------------" << endl;
-				cout << "Среднее время выполнения алгоритма = " << setw(3) << Result << "  секунд." << endl;
-				cout << "Кортежей соединилось = " << tuples_connected_R << endl;
+				cout << "РЎСЂРµРґРЅРµРµ РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р°Р»РіРѕСЂРёС‚РјР° = " << setw(3) << Result << "  СЃРµРєСѓРЅРґ." << endl;
+				cout << "РљРѕСЂС‚РµР¶РµР№ СЃРѕРµРґРёРЅРёР»РѕСЃСЊ = " << tuples_connected_R << endl;
 				cout << "---------------------------------------------------------------------" << endl;
 		}
 		else
@@ -99,7 +99,7 @@ class Algorithm_for_column_store_DBMS
 			int64_t tuples_connected;
 			repeat_time_start = clock();
 			tuples_connected = 0;
-		
+
 			#pragma omp parallel num_threads(Threads)
 			#pragma omp for reduction(+:tuples_connected)
 				for (int i = 0; i < size_mass; i++)
@@ -124,11 +124,11 @@ class Algorithm_for_column_store_DBMS
 				repeat_time_calculation = repeat_time_end - repeat_time_start;
 				Result = repeat_time_calculation / 1000;
 				cout << "---------------------------------------------------------------------" << endl;
-				cout << "Время выполнения алгоритма = " << setw(3) << Result << "  секунд." << endl;
-				cout << "Кортежей соединилось = " << tuples_connected << endl;
+				cout << "Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р°Р»РіРѕСЂРёС‚РјР° = " << setw(3) << Result << "  СЃРµРєСѓРЅРґ." << endl;
+				cout << "РљРѕСЂС‚РµР¶РµР№ СЃРѕРµРґРёРЅРёР»РѕСЃСЊ = " << tuples_connected << endl;
 				cout << "---------------------------------------------------------------------" << endl << endl;
 		}	
-	}// Конец функции Calculation()
+	}// РљРѕРЅРµС† С„СѓРЅРєС†РёРё Calculation()
 };
 
 class InputData 
@@ -138,13 +138,13 @@ class InputData
 	int64_t tuple_size, size_mass, size_mass2, Threads, Average_result_number;
 	string DEBUG, Average_result;
 
-	cout << "Вывести отладочную информацию ? Y/N \n";
+	cout << "Р’С‹РІРµСЃС‚Рё РѕС‚Р»Р°РґРѕС‡РЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ ? Y/N \n";
 	cin >> DEBUG;
-	cout << "Посчитать средний результат ? Y/N \n";
+	cout << "РџРѕСЃС‡РёС‚Р°С‚СЊ СЃСЂРµРґРЅРёР№ СЂРµР·СѓР»СЊС‚Р°С‚ ? Y/N \n";
 	cin >> Average_result;
 	if (Average_result == "Y")
 	{
-		cout << "Сколько раз повторить тест ? \n";
+		cout << "РЎРєРѕР»СЊРєРѕ СЂР°Р· РїРѕРІС‚РѕСЂРёС‚СЊ С‚РµСЃС‚ ? \n";
 		cin >> Average_result_number;
 		assert(Average_result_number != NULL);
 		assert(Average_result_number > NULL);
@@ -155,19 +155,19 @@ class InputData
 	}
 
 	cout << "---------------------------------------------------------------------" << endl;
-	cout << "Введите количество кортежей 1 отношения \n";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂС‚РµР¶РµР№ 1 РѕС‚РЅРѕС€РµРЅРёСЏ \n";
 	cin >> size_mass;
 	assert(size_mass != NULL);
 	assert(size_mass > NULL);
-	cout << "Введите количество кортежей 2 отношения \n";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂС‚РµР¶РµР№ 2 РѕС‚РЅРѕС€РµРЅРёСЏ \n";
 	cin >> size_mass2;
 	assert(size_mass2 != NULL);
 	assert(size_mass2 > NULL);
-	cout << "Введите количество столбцов \n";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ \n";
 	cin >> tuple_size;
 	assert(tuple_size != NULL);
 	assert(tuple_size > NULL);
-	cout << "Введите количество нитей \n";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РЅРёС‚РµР№ \n";
 	cin >> Threads;
 	assert(Threads != NULL);
 	assert(Threads > NULL);
@@ -191,11 +191,11 @@ int main()
 	class InputData start;
 	start.Configuration();
 	
-	cout << "Повторить расчеты Y/N ? \n" << endl;
+	cout << "РџРѕРІС‚РѕСЂРёС‚СЊ СЂР°СЃС‡РµС‚С‹ Y/N ? \n" << endl;
 	cin >> Repeat;
 	do {
 		start.Configuration();
-		cout << "Повторить расчеты Y/N ? \n";
+		cout << "РџРѕРІС‚РѕСЂРёС‚СЊ СЂР°СЃС‡РµС‚С‹ Y/N ? \n";
 		cin >> Repeat;
 	}	while (Repeat == "Y");
 
