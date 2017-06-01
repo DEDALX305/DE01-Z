@@ -1,8 +1,3 @@
 ﻿  Source.cpp
-c:\users\alex-work\documents\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(109): warning C4101: N_ProcRequest: неиспользованная локальная переменная
-c:\users\alex-work\documents\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(109): warning C4101: k2: неиспользованная локальная переменная
-c:\users\alex-work\documents\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(108): warning C4101: _Size1: неиспользованная локальная переменная
-c:\users\alex-work\documents\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(109): warning C4101: SizeCort: неиспользованная локальная переменная
-c:\users\alex-work\documents\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(108): warning C4101: _Size2: неиспользованная локальная переменная
-  ConsoleApplication2.vcxproj -> C:\Users\ALEX-WORK\Documents\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.exe
-  ConsoleApplication2.vcxproj -> C:\Users\ALEX-WORK\Documents\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.pdb (Partial PDB)
+  ConsoleApplication2.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.exe
+  ConsoleApplication2.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.pdb (Partial PDB)

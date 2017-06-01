@@ -39,3 +39,18 @@
 //#include <stdlib.h>
 //#include <stdio.h>
 //#include <windows.h>
+
+
+	cout << "Отношение 1 \n";
+	Size1 = 6000000;
+	/*cin >> _Size1;*/
+	/*Size1 = _Size1 / ((SFastMemory / 100 ) * 38);*/
+	assert(Size1 > NULL);
+	assert(Size1 != NULL);
+
+	cout << "Отношение 2 \n";
+	Size2 = 100000;
+	/*cin >> _Size2;*/
+	/*Size2 = _Size2 / ((SMainMemory / 100) * 44);*/
+	assert(Size2 > NULL);
+	assert(Size2 != NULL);
