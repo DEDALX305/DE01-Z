@@ -1,4 +1,13 @@
-﻿#include <iostream>   // для оператора cout
+﻿/*==================================================================================
+Проект:			DSMPM
+Тема:			Моделирование операции соединения в параллельной СУБД, выполняемой на многоядерном центральном процессоре INTEL XEON PHI
+				Database System on Manycore Processor Model (DSMPM)
+				Модуль тестирования
+Разработчик:	Рекачинский А.И.
+Руководитель:	Костенецкий П.С.
+Дата изменения: 03.06.2017
+===================================================================================*/
+#include <iostream>   // для оператора cout
 #include <iomanip>   // для функции setw
 #include <cassert>  // для функции assert
 #include <string>  // строчный тип данных
@@ -7,12 +16,36 @@
 /*==============================================*/
 using namespace std;
 
+class Debug_info
+{
+public:
+	void output(string DEBUG, int info)
+	{
+		if (DEBUG == "Y")
+		{
+			if (info == 1)
+			{
+				cout << "-----------------------------Отношение S-----------------------------" << endl;
+			}
+			else
+			{
+				cout << "-----------------------------Отношение R-----------------------------" << endl;
+			}
+		}
+	}
+};
+
 class Array 
 {
 	public:
 		int64_t **Attitude;
-		Array(int64_t tuple_size, int64_t size_mass, string DEBUG)
+		Array(int64_t tuple_size, int64_t size_mass, string DEBUG, int info)
 			{		
+			if (DEBUG == "Y")
+			{
+				class Debug_info debug;
+				debug.output(DEBUG, info);
+			}
 				Attitude = new int64_t*[size_mass];
 				for (int row = 0; row < size_mass; row++)
 					{
@@ -38,7 +71,7 @@ class Array
 class Algorithm_for_column_store_DBMS
 {
 	private:
-			float average_time[50], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
+			float average_time[100], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
 			int64_t tuples_connected_R;
 
 	public:void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, int64_t size_mass2, string DEBUG, int64_t Threads, string Average_result, int64_t Average_result_number, int64_t tuple_size)
@@ -55,7 +88,7 @@ class Algorithm_for_column_store_DBMS
 					#pragma omp	for reduction(+:tuples_connected)
 					for (int i = 0; i < size_mass; i++)
 					{
-						for (int j = 0; j < size_mass; j++)
+						for (int j = 0; j < size_mass2; j++)
 						{
 							for (int x = 0; x < tuple_size; x++)
 							{
@@ -82,12 +115,13 @@ class Algorithm_for_column_store_DBMS
 					   Sum_average_time = Sum_average_time + average_time[i];
 				   }
 				Result = (Sum_average_time / 1000) / Average_result_number;	
-
+				cout << "---------------------------------------------------------------------" << endl;
+				cout << "Время выполнения повторов" << endl;
 				float average_time_list;
-				for (int i = 0; i < average_time[i]; i++)
+				for (int i = 0; i < Average_result_number; i++)
 				{
 					average_time_list = average_time[i] / 1000;
-					cout << "  " << average_time_list << "  секунд." << endl;
+					cout << "Проход " << i << ": "<< average_time_list << "  секунд." << endl;
 				}
 				cout << "---------------------------------------------------------------------" << endl;
 				cout << "Среднее время выполнения алгоритма = " << setw(3) << Result << "  секунд." << endl;
@@ -155,11 +189,11 @@ class InputData
 	}
 
 	cout << "---------------------------------------------------------------------" << endl;
-	cout << "Введите количество кортежей 1 отношения \n";
+	cout << "Введите количество кортежей отношения S \n";
 	cin >> size_mass;
 	assert(size_mass != NULL);
 	assert(size_mass > NULL);
-	cout << "Введите количество кортежей 2 отношения \n";
+	cout << "Введите количество кортежей отношения R \n";
 	cin >> size_mass2;
 	assert(size_mass2 != NULL);
 	assert(size_mass2 > NULL);
@@ -173,9 +207,8 @@ class InputData
 	assert(Threads > NULL);
 	cout << "---------------------------------------------------------------------" << endl;
 
-	Array Mass1 = Array(tuple_size, size_mass, DEBUG);
-	cout << endl;
-	Array Mass2 = Array(tuple_size, size_mass2, DEBUG);
+	Array Mass1 = Array(tuple_size, size_mass, DEBUG, 1);
+	Array Mass2 = Array(tuple_size, size_mass2, DEBUG, 2);
 
 	class Algorithm_for_column_store_DBMS objColumn;
 	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, size_mass2, DEBUG, Threads, Average_result, Average_result_number, tuple_size);
@@ -193,12 +226,17 @@ int main()
 	
 	cout << "Повторить расчеты Y/N ? \n" << endl;
 	cin >> Repeat;
-	do {
-		start.Configuration();
-		cout << "Повторить расчеты Y/N ? \n";
-		cin >> Repeat;
-	}	while (Repeat == "Y");
-
-	system("pause");
+	if (Repeat == "Y") 
+	{
+		do {
+			start.Configuration();
+			cout << "Повторить расчеты Y/N ? \n";
+			cin >> Repeat;
+		} while (Repeat == "Y");
+	}
+	else
+	{
+		exit(0);
+	}
 	return 0;
 }
