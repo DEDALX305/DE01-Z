@@ -203,24 +203,11 @@ int main()
 	assert(_treads_N > NULL);
 	assert(_treads_N != NULL);
 
-	//for (int i = 0; i < _treads_N; i++)
-	//{
-	//	cout << "Введите количество потоков " << i << " теста:" << endl;
-	//	cin >> Treads_N[i];
-	//}
-
-	Treads_N[0] = 12;
-	Treads_N[1] = 24;
-	Treads_N[2] = 36;
-	Treads_N[3] = 48;
-	Treads_N[4] = 60;
-	Treads_N[5] = 72;
-	Treads_N[6] = 84;
-	Treads_N[7] = 96;
-	Treads_N[8] = 120;
-	Treads_N[9] = 160;
-	Treads_N[10] = 200;
-	Treads_N[11] = 240;
+	for (int i = 0; i < _treads_N; i++)
+	{
+		cout << "Введите количество потоков " << i << " теста:" << endl;
+		cin >> Treads_N[i];
+	}
 
 	for (int i = 0; i < _treads_N; i++)
 	{
@@ -267,7 +254,7 @@ int main()
 	cout << "В результате моделлирования были получены следующие результаты: " << endl << endl;
 	for (int i = 0; i < _treads_N; i++)
 	{
-		cout << "При " << Treads_N[i] << " потоках:  " << Result[i] << " условных едениц;" << endl;
+		cout << "При " << Treads_N[i] << " потоках:  " << Result[i] << " условныхd едениц;" << endl;
 	}
 	cout << "-------------------------------------------------------------------------------------------------" << endl;
 	system("Pause");
