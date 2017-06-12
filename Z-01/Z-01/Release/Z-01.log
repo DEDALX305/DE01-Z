@@ -1,0 +1,12 @@
+﻿  Source.cpp
+Source.cpp(65): warning C4244: инициализация: преобразование "int64_t" в "unsigned int", возможна потеря данных
+Source.cpp(68): warning C4244: инициализация: преобразование "int64_t" в "unsigned int", возможна потеря данных
+Source.cpp(96): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+Source.cpp(124): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+Source.cpp(151): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+Source.cpp(178): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+Source.cpp(241): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода
+  All 126 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  Z-01.vcxproj -> C:\Users\ALEX\Documents\GitHub\DE01-Z\Z-01\Release\Z-01.exe

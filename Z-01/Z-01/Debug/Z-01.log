@@ -1,2 +1,14 @@
-﻿  Z-01.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\Z-01\Debug\Z-01.exe
-  Z-01.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\Z-01\Debug\Z-01.pdb (Partial PDB)
+﻿  Source.cpp
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(65): warning C4244: инициализация: преобразование "int64_t" в "unsigned int", возможна потеря данных
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(68): warning C4244: инициализация: преобразование "int64_t" в "unsigned int", возможна потеря данных
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(96): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(124): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(151): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(178): warning C4244: =: преобразование "clock_t" в "float", возможна потеря данных
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(218): warning C4554: &: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(221): warning C4554: &: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(224): warning C4554: &: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(227): warning C4554: &: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+c:\users\alex\documents\github\de01-z\z-01\z-01\source.cpp(241): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Z-01.vcxproj -> C:\Users\ALEX\Documents\GitHub\DE01-Z\Z-01\Debug\Z-01.exe
+  Z-01.vcxproj -> C:\Users\ALEX\Documents\GitHub\DE01-Z\Z-01\Debug\Z-01.pdb (Partial PDB)

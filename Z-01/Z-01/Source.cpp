@@ -138,7 +138,7 @@ public:
 			for (int i = 0; i < Average_result_number; i++)
 			{
 				average_time_list = average_time[i] / 1000;
-				cout << "Проход " << i << ": " << average_time_list << "  секунд." << endl;
+				cout << "Повтор " << i << ": " << average_time_list << "  секунд." << endl;
 			}
 			cout << "---------------------------------------------------------------------" << endl;
 			cout << "Среднее время выполнения алгоритма = " << setw(3) << Result << "  секунд." << endl;
