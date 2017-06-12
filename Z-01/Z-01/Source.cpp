@@ -204,8 +204,7 @@ public: void Configuration()
 	{
 		cout << "—колько раз повторить тест ? \n";
 		cin >> Average_result_number;
-		assert(Average_result_number != NULL);
-		assert(Average_result_number > NULL);
+		assert(Average_result_number != 0 || Average_result_number > 0);
 	}
 	else
 	{
@@ -215,16 +214,16 @@ public: void Configuration()
 	cout << "---------------------------------------------------------------------" << endl;
 	cout << "¬ведите количество кортежей отношени€ S: ";
 	cin >> size_mass;
-	assert(size_mass != 0 & size_mass > 0);
+	assert(size_mass != 0 || size_mass > 0);
 	cout << "¬ведите количество кортежей отношени€ R: ";
 	cin >> size_mass2;
-	assert(size_mass2 != 0 & size_mass2 > 0);
+	assert(size_mass2 != 0 || size_mass2 > 0);
 	cout << "¬ведите количество столбцов: ";
 	cin >> tuple_size;
-	assert(tuple_size != 0 & tuple_size > 0);
+	assert(tuple_size != 0 || tuple_size > 0);
 	cout << "¬ведите количество нитей: ";
 	cin >> Threads;
-	assert(Threads != 0 & Threads > 0);
+	assert(Threads != 0 || Threads > 0);
 	//cout << "---------------------------------------------------------------------" << endl;
 
 	Array Mass1 = Array(tuple_size, size_mass, displayInfo, 1);
