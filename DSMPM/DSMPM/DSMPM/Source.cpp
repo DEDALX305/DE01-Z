@@ -12,7 +12,7 @@ public:
 	float t_1, t_2, InOut, Large_ratio, Small_ratio, FragMM, Number_of_fragments, SizeFragment, Ftml, GDAfrag_t1, OutFragM, SizeResultantSubfragment, SendAF, ClearFM, SizeFragmentLarge_ratio;
 	Memory_manager(float Size1, float Size2, float SFastMemory, float SMainMemory, float MainMemThroughput)
 	{
-		/*Константные переменные --------------------------------------------------------------*/
+		/*Переменные --------------------------------------------------------------*/
 		FragMM = 1;// указывает время, затраченное на фрагментацию данных в быстрой па-мяти;
 		GDAfrag_t1 = 1; //время затраченное на получение менеджером памяти адресов подфраг-ментов хранящихся в быстрой памяти 
 		ClearFM = 1;//время, затраченное на очистку быстрой памяти, задается константно;
@@ -20,7 +20,7 @@ public:
 		FragMM = 1; //указывает время, затраченное на фрагментацию данных в быстрой па-мяти;
 		t_1 = 1; // Время затраченное на сообщение информации о запросе менеджеру параллельных агентов 
 		t_2 = 1; // Время затраченное на сообщение информации о запросе менеджеру менеджеру памяти 
-		/*-------------------------------------------------------------------------------------*/
+		/*-------------------------------------------------------------------------*/
 		if (Size1 > Size2)
 		{
 			Large_ratio = Size1;
@@ -34,7 +34,7 @@ public:
 		InOut = t_1 + t_2;
 
 		Ftml = (Small_ratio / MainMemThroughput); // Указывает время, затраченное на загрузку меньшего отношения в быструю память.
-		assert(Ftml > NULL);
+		assert(Ftml > 0);
 #ifdef DEBUG 
 		cout << "Ftml " << Ftml << endl;
 #endif
@@ -46,13 +46,13 @@ public:
 #endif
 		/*-------------------------------------------------------------------------------------*/
 		SizeFragmentLarge_ratio = ((SFastMemory - Small_ratio) - Small_ratio) / 2; // Размер фрагмента большого отношения.
-		assert(SizeFragmentLarge_ratio > NULL);
+		assert(SizeFragmentLarge_ratio > 0);
 #ifdef DEBUG 
 		cout << "SizeFragmentLarge_ratio " << SizeFragmentLarge_ratio << endl;
 #endif
 		/*-------------------------------------------------------------------------------------*/
 		SizeResultantSubfragment = SizeFragmentLarge_ratio + Small_ratio; // Размер результирующего отношения
-		assert(SizeResultantSubfragment > NULL);
+		assert(SizeResultantSubfragment > 0);
 #ifdef DEBUG 
 		cout << "SizeResultantSubfragment " << SizeResultantSubfragment << endl;
 #endif
@@ -67,19 +67,19 @@ public:
 class Manager_of_parallel_agents
 {
 public:
-	float t_g, t_f, MesAfrag, GDAfrag_t2, ProcRequest, k2;
+	float t_g, t_f, MesAfrag, GDAfrag_t2, ProcRequest;
 
-	Manager_of_parallel_agents(float k1, float FastMemThroughputm, float PerfParallelAgentManager, float MainMemThroughput)
+	Manager_of_parallel_agents(float k1, float FastMemThroughputm, float PerfParallelAgentManager, float MainMemThroughput, float Virtual_cores)
 	{
-		/*---------------------------Константные переменные-----------------------------------*/
+		/*Переменные --------------------------------------------------------------*/
 		t_g = 1;// Время затраченное на создание группы агентов.
 		t_f = 1; // Время проверки свободных виртуальных процессоров. 
 		GDAfrag_t2 = 1;// Время затраченное на отправку менеджером памяти адресов подфрагментов хранящихся в быстрой памяти менеджеру параллельных агентов.
 		MesAfrag = 1;// Время, затраченное на сообщение адресов подфрагментов хранящихся в быстрой памяти группе параллельных агентов.
-		/*-------------------------------------------------------------------------------------*/
+		/*-------------------------------------------------------------------------*/
 
-		ProcRequest = (((k1 / FastMemThroughputm * 700) / PerfParallelAgentManager)*k2) * 40;
-		assert(ProcRequest > NULL);
+		ProcRequest = (((k1 / FastMemThroughputm * 700) / Virtual_cores)*PerfParallelAgentManager) * 40;
+		assert(ProcRequest != 0 & ProcRequest > 0);
 #ifdef DEBUG 
 		cout << "ProcRequest " << ProcRequest << endl;
 #endif
@@ -92,7 +92,7 @@ int main()
 #ifdef DEBUG 
 	cout << " DEBUG MODE!" << endl;
 #endif
-	cout << "==================================================================================" << endl;
+	cout << "===============================================================================" << endl;
 	cout << "	Проект: DSMPM" << endl;
 	cout << "	Тема : Моделирование операции соединения в параллельной СУБД, " << endl;
 	cout << "	выполняемой на многоядерном центральном процессоре INTEL XEON PHI" << endl;
@@ -100,82 +100,82 @@ int main()
 	cout << "	Разработчик : Рекачинский А.И." << endl;
 	cout << "	Руководитель : Костенецкий П.С." << endl;
 	cout << "	Дата изменения : 03.06.2017" << endl;
-	cout << "===================================================================================" << endl;
+	cout << "===============================================================================" << endl;
 
-	float	TimeFirst, TimeFinal, t_load, Time_j, time_j, N_ProcessingSteps, TALL, t_0, k1, Size1, Size2, SFastMemory, SMainMemory, MainMemThroughput, FastMemThroughput, PerfParallelAgentManager;
+	float	TimeFirst, TimeFinal, t_load, Time_j, time_j, N_ProcessingSteps, TALL, t_0, k1, Size1, Size2, SFastMemory, SMainMemory, MainMemThroughput, FastMemThroughput, PerfParallelAgentManager, Virtual_cores;
 	string _Treads_N;
-	//*-------------------------------------------------------------------------------------------------*/
+	/*-------------------------------------------------------------------------*/
 	TimeFinal = 1;
 	k1 = 25000000; // Коэффициент
-	//*-------------------------------------------------------------------------------------------------*/
+	/*-------------------------------------------------------------------------*/
 
 	cout << "Введите размер отношения S: ";
 	cin >> Size1;
-	assert(Size1 > NULL);
-	assert(Size1 != NULL);
+	/*Size1 = 10000000;*/
+	assert(Size1 != 0 & Size1 > 0);
 	cout << "Введите размер отношения R: ";
 	cin >> Size2;
-	assert(Size2 > NULL);
-	assert(Size2 != NULL);
+	//Size2 = 100000;
+	assert(Size2 != 0 & Size2 > 0);
 	cout << "Введите размер быстрой памяти: ";
 	cin >> SFastMemory;
-	assert(SFastMemory > NULL);
-	assert(SFastMemory != NULL);
+	/*SFastMemory = 16000000;*/
+	assert(SFastMemory != 0 & SFastMemory > 0);
 	cout << "Введите размер основной памяти: ";
 	cin >> SMainMemory;
-	assert(SMainMemory > NULL);
-	assert(SMainMemory != NULL);
+	//SMainMemory = 3930000;
+	assert(SMainMemory != 0 & SMainMemory > 0);
 	cout << "Введите пропускную способность основной памяти: ";
 	cin >> MainMemThroughput;
-	assert(MainMemThroughput > NULL);
-	assert(MainMemThroughput != NULL);
+	/*MainMemThroughput = 9000000;*/
+	assert(MainMemThroughput != 0 & MainMemThroughput > 0);
 	cout << "Введите пропускную способность быстрой памяти: ";
 	cin >> FastMemThroughput;
-	assert(FastMemThroughput > NULL);
-	assert(FastMemThroughput != NULL);
+	/*FastMemThroughput = 40000000;*/
+	assert(FastMemThroughput != 0 & FastMemThroughput > 0);
 	cout << "Введите производительсноть менеджера паралельных агентов: ";
 	cin >> PerfParallelAgentManager;
+	/*PerfParallelAgentManager = 1;*/
+	assert(PerfParallelAgentManager != 0 & PerfParallelAgentManager > 0);
 
 	float _treads_N, Treads_N[100], Result[100];
-	cout << "Укажите количество повторов теста:" << endl;
+	cout << "Укажите количество повторов теста: ";
 	cin >> _treads_N;
-	assert(_treads_N > NULL);
-	assert(_treads_N != NULL);
+	assert(_treads_N != 0 & _treads_N > 0);
 
 	for (int i = 0; i < _treads_N; i++)
 	{
-		cout << "Введите количество потоков " << i << " теста:" << endl;
+		cout << "Введите количество виртуальных ядер " << i << " теста: ";
 		cin >> Treads_N[i];
 	}
 
 	for (int i = 0; i < _treads_N; i++)
 	{
-		PerfParallelAgentManager = Treads_N[i];
-		assert(PerfParallelAgentManager > NULL);
-		assert(PerfParallelAgentManager != NULL);
+		Virtual_cores = Treads_N[i];
+		assert(Virtual_cores != 0 & Virtual_cores > 0);
 
 		Memory_manager* memory_manager = new Memory_manager(Size1, Size2, SFastMemory, SMainMemory, MainMemThroughput);
-		Manager_of_parallel_agents* manager_of_parallel_agents = new Manager_of_parallel_agents(k1, FastMemThroughput, PerfParallelAgentManager, MainMemThroughput);
+		Manager_of_parallel_agents* manager_of_parallel_agents = new Manager_of_parallel_agents(k1, FastMemThroughput, PerfParallelAgentManager, MainMemThroughput, Virtual_cores);
 		/*-------------------------------TimeFirst - подготовительный шаг-----------------------------------*/
 		t_load = memory_manager->Ftml + memory_manager->FragMM + memory_manager->GDAfrag_t1 + manager_of_parallel_agents->GDAfrag_t2;
-		assert(t_load > NULL);
+		assert(t_load > 0);
 #ifdef DEBUG 
-		cout << "t_load " << t_load << endl;
+		cout << "t_load: " << t_load << endl;
 #endif
 		t_0 = memory_manager->InOut + memory_manager->FragMM + manager_of_parallel_agents->t_f + manager_of_parallel_agents->t_g + t_load;
-		assert(t_0 > NULL);
+		assert(t_0 > 0);
 #ifdef DEBUG 
 		cout << "t_0 " << t_0 << endl;
 #endif
 		TimeFirst = t_0 + t_load;
 		/*--------------------------------Processing_steps - Шаги обработки--------------------------------*/
 		Time_j = manager_of_parallel_agents->MesAfrag + manager_of_parallel_agents->ProcRequest;
-		assert(Time_j > NULL);
+		assert(Time_j > 0);
 #ifdef DEBUG 
 		cout << "Time_j " << t_load << endl;
 #endif
 		time_j = memory_manager->OutFragM + memory_manager->ClearFM + memory_manager->SendAF;
-		assert(time_j > NULL);
+		assert(time_j > 0);
 #ifdef DEBUG 
 		cout << "time_j " << t_load << endl;
 #endif
@@ -188,13 +188,13 @@ int main()
 		Result[i] = TALL;
 	}
 
-	cout << "-------------------------------------------------------------------------------------------------" << endl;
+	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << "В результате моделлирования были получены следующие результаты: " << endl << endl;
 	for (int i = 0; i < _treads_N; i++)
 	{
-		cout << "При " << Treads_N[i] << " потоках:  " << Result[i] << " условных временных едениц;" << endl;
+		cout << "При " << Treads_N[i] << " виртуальных ядер:  " << Result[i] << " условных временных едениц;" << endl;
 	}
-	cout << "-------------------------------------------------------------------------------------------------" << endl;
+	cout << "-------------------------------------------------------------------------------" << endl;
 	system("Pause");
 	return 0;
 }

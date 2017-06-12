@@ -91,7 +91,7 @@ public:
 		k2 = 1;
 		if (PerfParallelAgentManager > 61)
 		{
-			k2 = 1.2;
+			k2 = 1;
 		}
 		else
 		{
@@ -107,7 +107,7 @@ public:
 		}
 		if (PerfParallelAgentManager == 160)
 		{
-			k2 = 2.05;
+			k2 = 1.9;
 		}
 		else
 		{
@@ -163,7 +163,7 @@ int main()
 	
 	cout << "Отношение 1 \n";
 	//cin >> Size1;
-	Size1 = 2000000;
+	Size1 = 10000000;
 	assert(Size1 > NULL);
 	assert(Size1 != NULL);
 	cout << "Отношение 2 \n";

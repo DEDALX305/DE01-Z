@@ -17,12 +17,12 @@ Database System on Manycore Processor Model (DSMPM)
 using namespace std;
 #define DEBUG
 
-class Debug_info
+class displayInfo_info
 {
 public:
-	void output(string debug, int info)
+	void output(string displayInfo, int info)
 	{
-		if (debug == "Y")
+		if (displayInfo == "Y")
 		{
 			if (info == 1)
 			{
@@ -35,9 +35,9 @@ public:
 		}
 	}
 
-	void Filling_in_arrays(int64_t value, string debug)
+	void Filling_in_arrays(int64_t value, string displayInfo)
 	{
-		if (debug == "Y")
+		if (displayInfo == "Y")
 		{
 			cout << value << endl;
 		}
@@ -54,12 +54,12 @@ class Array
 {
 public:
 	int64_t **Attitude, _Attitude;
-	Array(int64_t tuple_size, int64_t size_mass, string debug, int info)
+	Array(int64_t tuple_size, int64_t size_mass, string displayInfo, int info)
 	{
-		class Debug_info _debug;
-		if (debug == "Y")
+		class displayInfo_info _displayInfo;
+		if (displayInfo == "Y")
 		{
-			_debug.output(debug, info);
+			_displayInfo.output(displayInfo, info);
 		}
 		else {}
 		Attitude = new int64_t*[size_mass];
@@ -71,10 +71,10 @@ public:
 			{
 				Attitude[row][column] = rand() % 100000;
 
-				if (debug == "Y")
+				if (displayInfo == "Y")
 				{
 					_Attitude = Attitude[row][column];
-					_debug.Filling_in_arrays(_Attitude, debug);
+					_displayInfo.Filling_in_arrays(_Attitude, displayInfo);
 				}
 			}
 		}
@@ -87,7 +87,7 @@ private:
 	float average_time[100], Result, repeat_time_calculation, Sum_average_time, repeat_time_start, repeat_time_end;
 	int64_t tuples_connected_R, _Att1, _Att2;
 public:
-	void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, int64_t size_mass2, string debug, int64_t Threads, string Average_result, int64_t Average_result_number, int64_t tuple_size, string FilArrays)
+	void Calculation(int64_t **Att1, int64_t **Att2, int64_t size_mass, int64_t size_mass2, string displayInfo, int64_t Threads, string Average_result, int64_t Average_result_number, int64_t tuple_size, string FilArrays)
 	{
 		if (Average_result == "Y")
 		{
@@ -111,10 +111,10 @@ public:
 
 								if (FilArrays == "Y")
 								{
-									class Debug_info _debug;
+									class displayInfo_info _displayInfo;
 									_Att1 = Att1[i][x];
 									_Att2 = Att2[j][x];
-									_debug.Result(_Att1, _Att2);
+									_displayInfo.Result(_Att1, _Att2);
 								}
 								else {}
 							}
@@ -165,10 +165,10 @@ public:
 
 							if (FilArrays == "Y")
 							{
-								class Debug_info _debug;
+								class displayInfo_info _displayInfo;
 								_Att1 = Att1[i][x];
 								_Att2 = Att2[j][x];
-								_debug.Result(_Att1, _Att2);
+								_displayInfo.Result(_Att1, _Att2);
 							}
 							else {}
 						}
@@ -191,10 +191,10 @@ class InputData
 public: void Configuration()
 {
 	int64_t tuple_size, size_mass, size_mass2, Threads, Average_result_number;
-	string debug, Average_result, FilArrays;
+	string displayInfo, Average_result, FilArrays;
 
 	cout << "Вывести отладочную информацию? Y/N \n";
-	cin >> debug;
+	cin >> displayInfo;
 	cout << "Вывести информацию об заполнении массивов ? Y/N" << endl;
 	cin >> FilArrays;
 
@@ -215,27 +215,23 @@ public: void Configuration()
 	cout << "---------------------------------------------------------------------" << endl;
 	cout << "Введите количество кортежей отношения S: ";
 	cin >> size_mass;
-	assert(size_mass != NULL);
-	assert(size_mass > NULL);
+	assert(size_mass != 0 & size_mass > 0);
 	cout << "Введите количество кортежей отношения R: ";
 	cin >> size_mass2;
-	assert(size_mass2 != NULL);
-	assert(size_mass2 > NULL);
+	assert(size_mass2 != 0 & size_mass2 > 0);
 	cout << "Введите количество столбцов: ";
 	cin >> tuple_size;
-	assert(tuple_size != NULL);
-	assert(tuple_size > NULL);
+	assert(tuple_size != 0 & tuple_size > 0);
 	cout << "Введите количество нитей: ";
 	cin >> Threads;
-	assert(Threads != NULL);
-	assert(Threads > NULL);
+	assert(Threads != 0 & Threads > 0);
 	//cout << "---------------------------------------------------------------------" << endl;
 
-	Array Mass1 = Array(tuple_size, size_mass, debug, 1);
-	Array Mass2 = Array(tuple_size, size_mass2, debug, 2);
+	Array Mass1 = Array(tuple_size, size_mass, displayInfo, 1);
+	Array Mass2 = Array(tuple_size, size_mass2, displayInfo, 2);
 
 	class Algorithm_for_column_store_DBMS objColumn;
-	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, size_mass2, debug, Threads, Average_result, Average_result_number, tuple_size, FilArrays);
+	objColumn.Calculation(Mass1.Attitude, Mass2.Attitude, size_mass, size_mass2, displayInfo, Threads, Average_result, Average_result_number, tuple_size, FilArrays);
 }
 };
 

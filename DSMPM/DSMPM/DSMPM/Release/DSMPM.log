@@ -1,0 +1,9 @@
+﻿  Source.cpp
+Source.cpp(5): warning C4005: NDEBUG: изменение макроопределения
+  Source.cpp(5): note: аргументы командной строки:  см. предыдущее определение "NDEBUG"
+  Создание кода
+  1 of 42 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  DSMPM.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\DSMPM\DSMPM\Release\DSMPM.exe

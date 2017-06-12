@@ -1,7 +1,6 @@
 ﻿  Source.cpp
-c:\users\alex\desktop\de01-z\dsmpm\1\1\source.cpp(94): warning C4305: =: усечение из "double" в "float"
-c:\users\alex\desktop\de01-z\dsmpm\1\1\source.cpp(110): warning C4305: =: усечение из "double" в "float"
-c:\users\alex\desktop\de01-z\dsmpm\1\1\source.cpp(118): warning C4305: =: усечение из "double" в "float"
-c:\users\alex\desktop\de01-z\dsmpm\1\1\source.cpp(126): warning C4305: =: усечение из "double" в "float"
-  1.vcxproj -> C:\Users\ALEX\Desktop\DE01-Z\DSMPM\1\Debug\1.exe
-  1.vcxproj -> C:\Users\ALEX\Desktop\DE01-Z\DSMPM\1\Debug\1.pdb (Partial PDB)
+g:\институт, work и др\github\de01-z\dsmpm\для графиков\1\source.cpp(110): warning C4305: =: усечение из "double" в "float"
+g:\институт, work и др\github\de01-z\dsmpm\для графиков\1\source.cpp(118): warning C4305: =: усечение из "double" в "float"
+g:\институт, work и др\github\de01-z\dsmpm\для графиков\1\source.cpp(126): warning C4305: =: усечение из "double" в "float"
+  1.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\DSMPM\Для графиков\Debug\1.exe
+  1.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\DSMPM\Для графиков\Debug\1.pdb (Partial PDB)
