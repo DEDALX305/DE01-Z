@@ -1,7 +1,0 @@
-﻿  Source.cpp
-g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(110): warning C4700: использована неинициализированная локальная переменная "memory_manager"
-g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(110): warning C4700: использована неинициализированная локальная переменная "manager_of_parallel_agents"
-g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(115): warning C4700: использована неинициализированная локальная переменная "query_manager"
-g:\институт, work и др\github\de01-z\dsmpm\consoleapplication2\consoleapplication2\source.cpp(138): warning C4700: использована неинициализированная локальная переменная "TimeFinal"
-  ConsoleApplication2.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.exe
-  ConsoleApplication2.vcxproj -> G:\Институт, work и др\GitHub\DE01-Z\DSMPM\ConsoleApplication2\Debug\ConsoleApplication2.pdb (Partial PDB)
